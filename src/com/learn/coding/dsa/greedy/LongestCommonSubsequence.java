@@ -25,34 +25,9 @@ public class LongestCommonSubsequence {
 		lcsUtil(len1, len2, text1, text2, dp);
 		
 		return reconstructString(len1,len2,text1,text2,dp);
-		
 	}
 
 	private String reconstructString(int len1, int len2, String text1, String text2, int[][] dp) {
-		// TODO Auto-generated method stub
-		
-		StringBuilder len = new StringBuilder();
-		int i =len1;
-		int j =len2;
-		
-		while(i>0 && j>0) {
-			if(text1.charAt(i-1) == text2.charAt(j-1)) {
-				len.append(text1.charAt(i-1));
-				//move daigonally;
-				i--;
-				j--;
-			}
-			else if(dp[i-1][j] > dp[i][j-1]) {
-				i--;
-			}
-			else {
-				j--;
-			}
-		}		
-		return len.reverse().toString();
-	}
-
-	private String reconstructString1(int len1, int len2, String text1, String text2, int[][] dp) {
 		
 		StringBuilder lcs = new StringBuilder();
 		int i = len1, j = len2;

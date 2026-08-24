@@ -32,9 +32,7 @@ public class MergeSortedLinkList {
 		} else {
 			temp.next = list2;
 		}
-
 		return dummy.next;
-
 	}
 
 	private static void printLinkedList(Node list1) {
