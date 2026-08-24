@@ -7,117 +7,91 @@ import java.util.Set;
 
 public class LongestSubstring {
 
-	
-	
-	
-	
-	private static int lengthOfLongestSubstring(String string) {
-		// Longest Substring Without Repeating Characters (Sliding Window)
-		// abcabcbb
-		int start = 0;
-		int maxLength=0;
-		Set<Character> set = new HashSet<Character>();
-		for (int end = 0; end < string.length(); end++) {
-			while (set.contains(string.charAt(end))) {
-				set.remove(string.charAt(start));
-				start++;
-			}
-			set.add(string.charAt(end));			
-			maxLength= Math.max(maxLength, end-start+1);
-		}
-		return maxLength;
-	}
-	
-	private static String longestSubstringUsingArrays(String input) {
 
-	    if (input == null || input.isEmpty()) {
-	        return "";
-	    }
+    private static int lengthOfLongestSubstring(String string) {
+        // Longest Substring Without Repeating Characters (Sliding Window)
+        int left = 0;
+        int maxLength = 0;
+        Set<Character> set = new HashSet<Character>();
+        for (int right = 0; right < string.length(); right++) {
+            Character ch = string.charAt(right);
+            while (set.contains(ch)) {
+                set.remove(string.charAt(left));
+                left++;
+            }
+            set.add(ch);
+            int currentLength = right - left + 1;
+            maxLength = Math.max(maxLength, currentLength);
+        }
+        return maxLength;
+    }
 
-	    int[] lastSeen = new int[256];
-	    Arrays.fill(lastSeen, -1);
+    private static String longestSubstringUsingArrays(String input) {
 
-	    int start = 0;
-	    int maxStart = 0;
-	    int maxLength = 0;
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
 
-	    for (int end = 0; end < input.length(); end++) {
+        int[] lastSeen = new int[256];
+        Arrays.fill(lastSeen, -1);
 
-	        char ch = input.charAt(end);
+        int left = 0;
+        int startIndex = 0;
+        int maxLength = 0;
 
-	        int previousIndex = lastSeen[ch];
+        for (int right = 0; right < input.length(); right++) {
 
-	        lastSeen[ch] = end;
+            char ch = input.charAt(right);
 
-	        if (previousIndex >= start) {
-	            start = previousIndex + 1;
-	        }
+            int previousIndexOfChar = lastSeen[ch];
 
-	        int currentLength = end - start + 1;
-
-	        if (currentLength > maxLength) {
-	            maxLength = currentLength;
-	            maxStart = start;
-	        }
-	    }
-
-	    return input.substring(maxStart, maxStart + maxLength);
-	}
-
-	private static String longestSubstringUsingHashSet(String input) {
-
-		int start = 0;
-		int maxLength = 0;
-		int maxStart = 0;
-		Set<Character> set = new HashSet<Character>();
-
-		for (int end = 0; end < input.length(); end++) {
-
-			while (set.contains(input.charAt(end))) {
-				set.remove(input.charAt(start));
-				start++;
+			if (previousIndexOfChar >= left) {
+				left = previousIndexOfChar + 1;
 			}
 
-			set.add(input.charAt(end));
+            lastSeen[ch] = right;
 
-			if (end - start + 1 > maxLength) {
-				maxLength = end - start + 1;
-				maxStart = start;
-			}
-		}
-		return input.substring(maxStart, maxStart + maxLength);
+            int currentLength = right - left + 1;
 
-	}
+            if (currentLength > maxLength) {
+                maxLength = currentLength;
+                startIndex = left;
+            }
+        }
 
-	public static String longestSubstringUsingHashMap(String input) {
+        return input.substring(startIndex, startIndex + maxLength);
+    }
 
-		int start = 0;
-		int maxLength = 0;
-		int maxStart =0;
+    public static String longestSubstringUsingHashMap(String input) {
 
-		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int left = 0;
+        int maxLength = 0;
+        int startIndex = 0;
 
-		for (int endIndex = 0; endIndex < input.length(); endIndex++) {
+        HashMap<Character, Integer> seen = new HashMap<Character, Integer>();
 
-			char currentChar = input.charAt(endIndex);
-			Integer previousIndex = map.get(currentChar);
+        for (int right = 0; right < input.length(); right++) {
 
-			if (previousIndex != null && previousIndex > start) {
-				start = previousIndex + 1;
+            Character ch = input.charAt(right);
+            Integer previousIndex = seen.get(ch);
 
-			}
+            if (previousIndex != null && previousIndex > left) {
+                left = previousIndex + 1;
+            }
 
-			map.put(currentChar, endIndex);
+            seen.put(ch, right);
 
-			if (endIndex - start + 1 > maxLength) {
-				maxLength  = endIndex - start +1;
-				maxStart = start;
-			}
-		}
-		return input.substring(maxStart,maxStart+maxLength);
-	}
-	
-	public static void main(String[] args) {
+            int currentLength = right - left + 1;
+
+            if (currentLength > maxLength) {
+                maxLength = currentLength;
+                startIndex = left;
+            }
+        }
+        return input.substring(startIndex, startIndex + maxLength);
+    }
+
+    public static void main(String[] args) {
 		
 		/*
 		
@@ -146,10 +120,10 @@ public class LongestSubstring {
 		
 		*/
 
-		System.out.println(lengthOfLongestSubstring("abcbcbc"));
-		System.out.println(longestSubstringUsingArrays("abcbcbc"));
-		System.out.println(longestSubstringUsingHashSet("abcbcbc"));
-		System.out.println(longestSubstringUsingHashMap("abcbcbc"));
-	}
+        System.out.println(lengthOfLongestSubstring("abcdbcbc"));
+        System.out.println(longestSubstringUsingArrays("abcdbcbc"));
+        System.out.println(longestSubstringUsingHashSet("abcdbcbc"));
+        System.out.println(longestSubstringUsingHashMap("abcdbcbc"));
+    }
 
 }
