@@ -13,6 +13,23 @@ public class MoveZero {
 		int pos = 0;
 		moveZeroToEnd(arr, pos);
 		System.out.println(Arrays.toString(arr));
+
+
+		int arr1[] = { 0, 1, 0, 13, 0, 2 };
+
+		moveZeroToEndTwoPointer(arr1);
+		System.out.println(Arrays.toString(arr));
+
+	}
+
+	private static void moveZeroToEndTwoPointer(int[] arr) {
+		int left =0;
+		for(int right = 0; right < arr.length;right++){
+			int temp = arr[left];
+			arr[left] = arr[right];
+			arr[right] =temp;
+			left++;
+		}
 	}
 
 	private static void moveZeroToEnd(int[] arr, int pos) {

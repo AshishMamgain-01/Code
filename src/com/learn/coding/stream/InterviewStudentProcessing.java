@@ -36,7 +36,14 @@ public class InterviewStudentProcessing {
 
     public static void main(String[] args) {
 
-        List<Student> students = Arrays.asList(new Student("Alice", 85), new Student("Bob", 92), new Student("Charlie", 70), new Student("David", 60), new Student("Eve", 88), new Student("Frank", 92), new Student("Grace", 75), new Student("Henry", 85));
+        List<Student> students = Arrays.asList(new Student("Alice", 85),
+                new Student("Bob", 92),
+                new Student("Charlie", 70),
+                new Student("David", 60),
+                new Student("Eve", 88),
+                new Student("Frank", 92),
+                new Student("Grace", 75),
+                new Student("Henry", 85));
 
 
         // ============================================================
