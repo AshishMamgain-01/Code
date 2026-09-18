@@ -1,3 +1,5 @@
+package com.learn.coding.designpattern.creational.builder.singleton;
+
 // Singleton.java
 class mySingleton {
     private static mySingleton instance;

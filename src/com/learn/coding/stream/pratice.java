@@ -1,5 +1,8 @@
+package com.learn.coding.stream;
 
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.Comparator;
 class practice{
 	
 	public static void main (String args[]){

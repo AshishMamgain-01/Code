@@ -53,12 +53,33 @@ class CustomHashMap<K, V> {
 
 	public V get(K key) {
 		int index = hash(key);
-		for (Entry<K, V> e = table[index]; e != null; e = e.next) {
+		Entry<K, V> head = table[index];
+
+		for (Entry<K, V> e = head; e != null; e = e.next) {
 			if (Objects.equals(e.key, key)) {
 				return e.value;
 			}
 		}
 		return null;
+	}
+
+	public void remove(K key) {
+		int index = hash(key);
+		Entry<K, V> head = table[index];
+		Entry<K, V> prev = null;
+
+		for (Entry<K, V> e = head; e != null; e = e.next) {
+			if (e.key == key) {
+				if (prev == null) {
+					table[index] = e.next;
+				} else {
+					prev.next = e.next;
+				}
+				size--;
+				return;
+			}
+			prev = e;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -77,15 +98,20 @@ class CustomHashMap<K, V> {
 }
 
 public class TestCustomHashMap {
-    public static void main(String[] args) {
-    	CustomHashMap<String, Integer> map = new CustomHashMap<>();
-        map.put("Ashish", 1);
-        map.put("Interview", 2);
-        map.put("Java", 3);
+	public static void main(String[] args) {
+		CustomHashMap<String, Integer> map = new CustomHashMap<>();
+		map.put("Ashish", 1);
+		map.put("Interview", 2);
+		map.put("Java", 3);
+		map.put("Dummy",4);
+		
 
-        System.out.println(map.get("Ashish"));     // 1
-        System.out.println(map.get("Interview"));  // 2
-        System.out.println(map.get("Java"));       // 3
-        System.out.println(map.get("Unknown"));    // null
-    }
+		System.out.println(map.get("Ashish")); // 1
+		System.out.println(map.get("Interview")); // 2
+		System.out.println(map.get("Java")); // 3
+		System.out.println(map.get("Dummy")); // 4
+		System.out.println(map.get("Unknown")); // null
+		map.remove("Dummy");
+		System.out.println(map.get("Dummy")); // 4
+	}
 }

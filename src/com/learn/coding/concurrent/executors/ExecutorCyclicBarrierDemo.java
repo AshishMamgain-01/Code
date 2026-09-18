@@ -1,13 +1,14 @@
 package com.learn.coding.concurrent.executors;
-
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-class PlayerTask implements Runnable {
-    private final CyclicBarrier barrier;
+class Task implements Runnable {
+    private final CyclicBarrier cyclicBarrier;
 
-    public PlayerTask(CyclicBarrier barrier) {
-        this.barrier = barrier;
+    public Task(CyclicBarrier barrier) {
+        this.cyclicBarrier = barrier;
     }
 
     @Override
@@ -16,7 +17,7 @@ class PlayerTask implements Runnable {
 
         try {
             Thread.sleep((long) (Math.random() * 3000)); // simulate arrival delay
-            barrier.await(); // wait until all players arrive
+            cyclicBarrier.await(); // wait until all players arrive
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (BrokenBarrierException e) {
@@ -27,15 +28,17 @@ class PlayerTask implements Runnable {
     }
 }
 
-public class CyclicBarrierDemo {
+public class ExecutorCyclicBarrierDemo {
     public static void main(String[] args) {
         CyclicBarrier barrier = new CyclicBarrier(3, () -> 
             System.out.println("\nAll players arrived. Game Starts!\n")
         );
 
-        // Create and start players
-        new Thread(new PlayerTask(barrier), "Player-1").start();
-        new Thread(new PlayerTask(barrier), "Player-2").start();
-        new Thread(new PlayerTask(barrier), "Player-3").start();
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        executor.submit(new Task(barrier));
+        executor.submit(new Task(barrier));
+        executor.submit(new Task(barrier));
+        executor.shutdown();
     }
 }

@@ -54,7 +54,7 @@ public class LRUCache {
 
 		addAfterHead(node);
 
-		// capcity exceeded
+		// capacity exceeded
 
 		if (map.size() > capacity) {
 			Node lru = tail.previous;
@@ -83,11 +83,11 @@ public class LRUCache {
 
 		head.next.previous = node;
 		head.next = node;
-
 	}
 
 	private void remove(Node node) {
 		// TODO Auto-generated method stub
+		if (node == head || node == tail) return;
 		node.previous.next = node.next;
 		node.next.previous = node.previous;
 	}
@@ -109,6 +109,7 @@ public class LRUCache {
 		System.out.println(cache.get(3));
 		System.out.println(cache.get(4));
 		System.out.println(cache.get(5));
+		
 	}
 
 }

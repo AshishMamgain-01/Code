@@ -38,12 +38,14 @@ Queue    Threads < max?
 public class ThreadPoolExecutorExample {
 
 	public static void main(String[] args) {
-		try (ThreadPoolExecutor executor = new ThreadPoolExecutor(2, // Core pool size
+		try (ThreadPoolExecutor executor = new ThreadPoolExecutor(
+				2, // Core pool size
 				4, // Maximum pool size
 				1, // Keep alive time (seconds)
 				TimeUnit.SECONDS, // Time unit for keep alive time
 				new LinkedBlockingQueue<>(1), // Task queue
 				new ThreadPoolExecutor.DiscardPolicy())) {
+			
 			// Submit 5 tasks to the executor
 			for (int i = 1; i <= 7; i++) {
 				final int taskId = i;

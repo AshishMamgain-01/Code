@@ -1,28 +1,30 @@
 package com.learn.coding.corejava.streams;
 
-import java.util.List;
 import java.util.Optional;
 
-/**
- * Optional is a return type for "missing", not a field, not a parameter.
- */
 public class OptionalPitfallsDemo {
 
+	/*
+	 * Feature  		orElse 								orElseGet 
+	 * Argument type 	Direct 								value Supplier
+	 *(lambda/function) Evaluation Always evaluated (eager) Evaluated only if empty(lazy)
+	 * Use case 		Cheap, constant fallback 			Expensive fallback (DB call, I/O)
+	 * 
+	 */
+	public static String expensiveOperation() {
+		System.out.println("Expensive operation executed!");
+		return "Fallback";
+	}
+
 	public static void main(String[] args) {
-		System.out.println(deviceName(Optional.of("NCS1004")));
-		System.out.println(deviceName(Optional.empty()));
+		Optional<String> opt = Optional.of("Ashish");
+		Optional<String> opt1 = Optional.empty();
 
-		List<String> ids = List.of("a", "b");
-		System.out.println("empty collection, not Optional<List>: " + ids.stream().filter(s -> s.isBlank()).toList());
+		System.out.println("Using orElse:");
+		String val1 = opt1.orElse(expensiveOperation()); // prints "Expensive operation executed!"
 
-		try {
-			Optional.<String>empty().get();
-		} catch (Exception e) {
-			System.out.println("never call get() on empty: " + e.getClass().getSimpleName());
-		}
+		System.out.println("Using orElseGet:");
+		String val2 = opt1.orElseGet(() -> expensiveOperation()); // supplier not executed
 	}
 
-	static String deviceName(Optional<String> maybe) {
-		return maybe.map(String::toUpperCase).orElse("UNKNOWN");
-	}
 }

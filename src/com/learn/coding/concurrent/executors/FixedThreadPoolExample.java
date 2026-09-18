@@ -7,15 +7,11 @@ import java.util.concurrent.Executors;
 public class FixedThreadPoolExample {
 
 	public static void main(String[] args) {
-
 		ExecutorService executor = Executors.newFixedThreadPool(3);
-
 		for (int i = 1; i <= 10; i++) {
 			int task = i;
-
 			executor.submit(() -> {
 				System.out.println(Thread.currentThread().getName() + " executing Task " + task);
-
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -23,7 +19,6 @@ public class FixedThreadPoolExample {
 				}
 			});
 		}
-
 		executor.shutdown();
 	}
 }

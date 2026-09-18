@@ -4,43 +4,43 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-class Task implements Runnable {
+class MyTask implements Runnable {
     private final CountDownLatch latch;
 
-    public Task(CountDownLatch latch) {
+    public MyTask(CountDownLatch latch) {
         this.latch = latch;
     }
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " started working");
+        System.out.println(Thread.currentThread().getName() + " started working\n");
 
         try {
             Thread.sleep(2000); // simulate work
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        finally {
+        	System.out.println(Thread.currentThread().getName() + " finishing task\n");
+            latch.countDown(); // always decrement
+        }
 
-        System.out.println(Thread.currentThread().getName() + " finished");
-        latch.countDown();
     }
 }
 
-public class CountDownLatchWithExecutor {
+public class ExecutorCountDownLatchDemo {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(3);
         CountDownLatch latch = new CountDownLatch(3);
 
         // Submit tasks
-        executor.submit(new Task(latch));
-        executor.submit(new Task(latch));
-        executor.submit(new Task(latch));
+        executor.submit(new MyTask(latch));
+        executor.submit(new MyTask(latch));
+        executor.submit(new MyTask(latch));
 
-        // Manager waits until all tasks finish
+        // waits until all tasks finish
         latch.await();
-
         System.out.println("All tasks are completed successfully !!!");
-
         executor.shutdown();
     }
 }
