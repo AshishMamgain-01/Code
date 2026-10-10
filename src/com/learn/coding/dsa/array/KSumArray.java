@@ -6,6 +6,7 @@ import java.util.List;
 
 public class KSumArray {
 
+	//Goal: Find all unique combinations of k numbers from the array that sum to a given target.
 	public static void main(String[] args) {
 		int[] arr = { 1, 0, -1, 0, -2, 2 };
 		int target = 0;

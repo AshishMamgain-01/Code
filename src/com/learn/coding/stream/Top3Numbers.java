@@ -20,6 +20,8 @@ public class Top3Numbers {
                 .sorted() // sort ascending
                 .limit(3)
                 .collect(Collectors.toList());
+        
+        
 
         System.out.println("Top 3 Max: " + top3Max);
         System.out.println("Top 3 Min: " + top3Min);

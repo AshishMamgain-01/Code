@@ -1,4 +1,4 @@
-package com.learn.coding.dsa.epam;
+package com.learn.coding.customImplementation;
 
 import java.util.Objects;
 
@@ -95,16 +95,13 @@ class CustomHashMap<K, V> {
 			}
 		}
 	}
-}
 
-public class TestCustomHashMap {
 	public static void main(String[] args) {
 		CustomHashMap<String, Integer> map = new CustomHashMap<>();
 		map.put("Ashish", 1);
 		map.put("Interview", 2);
 		map.put("Java", 3);
-		map.put("Dummy",4);
-		
+		map.put("Dummy", 4);
 
 		System.out.println(map.get("Ashish")); // 1
 		System.out.println(map.get("Interview")); // 2

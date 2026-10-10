@@ -28,7 +28,7 @@ public class MergeOverlapVaritation2 {
 		int i=0;
 		List<int[]> result = new ArrayList<int[]>();
 		
-		while(i<intervals.length && intervals[i][1] < newInterval[0])
+		while(i<intervals.length && intervals[i][1] < newInterval[0]) //end of interval less that current start
 		{
 			result.add(intervals[i]);
 			i++;

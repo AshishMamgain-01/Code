@@ -21,17 +21,17 @@ public class CompletableFutureExample {
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
 
-        CompletableFutureExample service = new CompletableFutureExample();
+        CompletableFutureExample classObj = new CompletableFutureExample();
 
         // Run all APIs in parallel
         CompletableFuture<Customer> customerFuture =
-                CompletableFuture.supplyAsync(service::getCustomer, executor);
+                CompletableFuture.supplyAsync(classObj::getCustomer, executor);
 
         CompletableFuture<List<Order>> ordersFuture =
-                CompletableFuture.supplyAsync(service::getOrders, executor);
+                CompletableFuture.supplyAsync(classObj::getOrders, executor);
 
         CompletableFuture<Payment> paymentFuture =
-                CompletableFuture.supplyAsync(service::getPayment, executor);
+                CompletableFuture.supplyAsync(classObj::getPayment, executor);
 
         // Wait for all futures
         CompletableFuture<Void> all =
@@ -52,8 +52,8 @@ public class CompletableFutureExample {
 
         // Chaining example
         CompletableFuture
-                .supplyAsync(service::getUser, executor)
-                .thenApply(service::processUser)
+                .supplyAsync(classObj::getUser, executor)
+                .thenApply(classObj::processUser)
                 .thenAccept(System.out::println)
                 .join();
 

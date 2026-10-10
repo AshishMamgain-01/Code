@@ -1,4 +1,4 @@
-package com.learn.coding.designpattern.creational.builder.singleton;
+package com.learn.coding.designpattern.creational.singleton;
 
 class HolderSingleton1 {
 

@@ -857,5 +857,34 @@ public class InterviewEmployeeStream {
                             ", avg=" + stats.getAverage()
             );
         });
+        
+        Map<String, List<Employee>> a = employees.stream()
+        .filter(emp -> emp.salary>40000)
+        .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.toList()));
+        
+        Map<String, Employee> emp = employees.stream()
+        		.collect(Collectors.toMap(Employee::getDepartment, emp100->emp100, (e1001,e1002) -> e1001.getSalary() > e1002.getSalary()?e1001:e1002,LinkedHashMap::new));
+        
+        
+        Map<String, List<Employee>> em1111 = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, 
+        		Collectors.collectingAndThen(Collectors.toList(), list -> {
+        			Double maxSalary = list.stream().mapToDouble(Employee::getSalary).max().orElse(0.0);        			
+        			return list.stream().filter(e->e.getSalary()==maxSalary).collect(Collectors.toList());
+        			
+        		})));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>em1111"+em1111);
+        
+        Map<String, List<Employee>> em22222=employees.stream()
+        .collect(Collectors.groupingBy(Employee::getDepartment,
+        		Collectors.collectingAndThen(Collectors.toList(), list -> {
+        			Set<Double> maxSalary= list.stream()
+        					.map(Employee::getSalary)
+        					.sorted(Comparator.reverseOrder())
+        					.limit(3)
+        					.collect(Collectors.toSet());
+        			
+        			return list.stream().filter(e -> maxSalary.contains(e.getSalary())).collect(Collectors.toList());       					
+        		})));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>222222222222"+em1111);
     }
 }

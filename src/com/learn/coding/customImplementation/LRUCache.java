@@ -1,15 +1,15 @@
-package com.learn.coding.dsa.linklist;
+package com.learn.coding.customImplementation;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LRUCache {
+class LRUCache {
 
 	static class Node {
 		int key;
 		int value;
 		Node next;
-		Node previous;
+		Node prev;
 
 		public Node(int key, int value) {
 			this.key = key;
@@ -17,79 +17,65 @@ public class LRUCache {
 		}
 	}
 
-	private final int capacity;
-	private final Map<Integer, Node> map;
-	private final Node head;
-	private final Node tail;
+	public final int capacity;
+	public final Node head;
+	public final Node tail;
+	public final Map<Integer, Node> map;
 
 	public LRUCache(int capacity) {
+
 		if (capacity <= 0) {
-			throw new IllegalArgumentException("Capcity should be greater than 0");
+			throw new IllegalArgumentException("Size can't be less than zero.");
 		}
 		this.capacity = capacity;
-
+		this.head = new Node(0, 0);
+		this.tail = new Node(0, 0);
 		map = new HashMap<Integer, LRUCache.Node>();
-		head = new Node(0, 0);
-		tail = new Node(0, 0);
 
 		head.next = tail;
-		tail.previous = head;
-
+		tail.prev = head;
 	}
 
-	// head <-> 3(30) <-> 2(20) <-> 1(10) <-> tail
-
 	public void put(int key, int value) {
-
 		if (map.containsKey(key)) {
 			Node node = map.get(key);
 			node.value = value;
-			remove(node);
+			removeNode(node);
 			addAfterHead(node);
 			return;
 		}
-
-		Node node = new Node(key, value);
-		map.put(key, node);
-
-		addAfterHead(node);
-
-		// capacity exceeded
-
+		Node newNode = new Node(key, value);
+		map.put(key, newNode);
+		addAfterHead(newNode);
 		if (map.size() > capacity) {
-			Node lru = tail.previous;
-
-			remove(lru);
+			Node lru = tail.prev;
+			removeNode(lru);
 			map.remove(lru.key);
 		}
-
 	}
 
 	public int get(int key) {
-
 		Node node = map.get(key);
-		if (node == null)
+		if (node == null) {
 			return -1;
-		remove(node);
+		}
+		removeNode(node);
 		addAfterHead(node);
 		return node.value;
+
 	}
 
-	private void addAfterHead(Node node) {
-		// node at front pos
+	public void removeNode(Node node) {
+		node.prev.next = node.next;
+		node.next.prev = node.prev;
+	}
 
+	public void addAfterHead(Node node) {
 		node.next = head.next;
-		node.previous = head;
+		node.prev = head;
 
-		head.next.previous = node;
+		head.next.prev = node;
 		head.next = node;
-	}
-
-	private void remove(Node node) {
-		// TODO Auto-generated method stub
-		if (node == head || node == tail) return;
-		node.previous.next = node.next;
-		node.next.previous = node.previous;
 	}
 
 	public static void main(String[] args) {
@@ -97,19 +83,12 @@ public class LRUCache {
 		cache.put(1, 10);
 		cache.put(2, 20);
 		cache.put(3, 30);
-
-		System.out.println(cache.get(1));
-
 		cache.put(4, 40);
-		System.out.println(cache.get(2));
 
-		cache.put(5, 50);
 		System.out.println(cache.get(1));
 		System.out.println(cache.get(2));
 		System.out.println(cache.get(3));
 		System.out.println(cache.get(4));
-		System.out.println(cache.get(5));
-		
 	}
 
 }

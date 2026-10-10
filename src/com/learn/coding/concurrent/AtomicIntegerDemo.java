@@ -2,7 +2,7 @@ package com.learn.coding.concurrent;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-class Counter3 {
+class Counter {
     private AtomicInteger count = new AtomicInteger(0);
 
     public void increment() {
@@ -16,18 +16,18 @@ class Counter3 {
 
 public class AtomicIntegerDemo {
     public static void main(String[] args) throws InterruptedException {
-        Counter3 counter3 = new Counter3();
+    	Counter counter = new Counter();
 
         // Two threads increment the counter
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < 1000; i++) {
-                counter3.increment();
+            	counter.increment();
             }
         });
 
         Thread t2 = new Thread(() -> {
             for (int i = 0; i < 1000; i++) {
-                counter3.increment();
+            	counter.increment();
             }
         });
 
@@ -37,6 +37,6 @@ public class AtomicIntegerDemo {
         t1.join();
         t2.join();
 
-        System.out.println("Final Count: " + counter3.getCount());
+        System.out.println("Final Count: " + counter.getCount());
     }
 }

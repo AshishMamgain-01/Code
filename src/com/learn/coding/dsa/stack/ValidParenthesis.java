@@ -5,7 +5,7 @@ import java.util.ArrayDeque;
 public class ValidParenthesis {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 		System.out.println(isValid("()")); // true
 		System.out.println(isValid("()[]{}")); // true

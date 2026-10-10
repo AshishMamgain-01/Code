@@ -1,4 +1,4 @@
-package com.learn.coding.designpattern.singleton;
+package com.learn.coding.designpattern.creational.singleton;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;

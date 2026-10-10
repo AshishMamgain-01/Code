@@ -21,7 +21,8 @@ public class LongestCompleteString {
 			}
 
 			if (isComplete) {
-				if (result.equals("None") || s.length() > result.length()
+				if (result.equals("None") 
+						|| s.length() > result.length()
 						|| (s.length() == result.length() && s.compareTo(result) < 0)) {
 					result = s;
 				}

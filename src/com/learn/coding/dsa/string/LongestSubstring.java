@@ -146,7 +146,7 @@ public class LongestSubstring {
         return results;
     }
 
-
+    
     public static void main(String[] args) {
 		
 		/*

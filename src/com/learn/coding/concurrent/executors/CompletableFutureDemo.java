@@ -15,9 +15,12 @@ public class CompletableFutureDemo {
 
 		// Chain transformations
 		future.thenApply(result -> result.toUpperCase()).thenAccept(System.out::println);
-
+		
 		// Block only if needed
 		System.out.println("Original result: " + future.get());
+		
+		
+		  
 
 	}
 }

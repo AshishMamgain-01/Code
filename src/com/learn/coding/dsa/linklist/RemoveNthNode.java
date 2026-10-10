@@ -51,6 +51,9 @@ public class RemoveNthNode {
 
         return head;
     }
+    
+    //kth node from the end = (n - k + 1)‑th node from the beginning
+    
 
     public static Node removeKthFromEnd(Node head, int k) {
 

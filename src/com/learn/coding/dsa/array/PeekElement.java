@@ -39,13 +39,13 @@ public class PeekElement {
 		while (left < right) {
 			int mid = left + (right - left) / 2;
 			if (num[mid] < num[mid + 1]) {
-				left = mid + 1;
+				left = mid + 1; // Peak lies on the right side
 			} else {
-				right = mid;
+				right = mid;  // Peak lies on the left side (including mid)
 			}
 		}
 
-		return left;
+		return left; // or right, both point to a peak index
 	}
 
 }

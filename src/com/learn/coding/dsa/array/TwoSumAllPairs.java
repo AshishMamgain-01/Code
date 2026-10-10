@@ -15,6 +15,7 @@ public class TwoSumAllPairs {
             int requiredNumber = target - arr[i];
             if (map.containsKey(requiredNumber)) {
                 result.add(new int[]{map.get(requiredNumber), i});
+                //result.add(new int[]{requiredNumber, arr[i]});
             }
             map.put(arr[i], i);
         }
