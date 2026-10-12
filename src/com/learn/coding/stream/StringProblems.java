@@ -8,6 +8,7 @@ public class StringProblems {
 	public static void main(String[] args) {
 
 		String str = "This is my life I love my life";
+		System.out.println("Input String : " +str);
 
 		// 1️⃣ Count frequency of each word and print those with occurrence > 1
 		Arrays.stream(str.split(" "))
