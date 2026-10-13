@@ -28,7 +28,7 @@ class MyTask implements Runnable {
     }
 }
 
-public class ExecutorCountDownLatchDemo {
+public class CountDownLatchDemo {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(3);
         CountDownLatch latch = new CountDownLatch(3);

@@ -28,7 +28,7 @@ class Task implements Runnable {
     }
 }
 
-public class ExecutorCyclicBarrierDemo {
+public class CyclicBarrierDemo {
     public static void main(String[] args) {
         CyclicBarrier barrier = new CyclicBarrier(3, () -> 
             System.out.println("\nAll players arrived. Game Starts!\n")

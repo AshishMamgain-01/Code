@@ -4,7 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class CompletableFutureExample {
+public class CompletableFutureExample2 {
 
     // Java Records
     record Customer(int id, String name) {}
@@ -21,7 +21,7 @@ public class CompletableFutureExample {
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
 
-        CompletableFutureExample classObj = new CompletableFutureExample();
+        CompletableFutureExample2 classObj = new CompletableFutureExample2();
 
         // Run all APIs in parallel
         CompletableFuture<Customer> customerFuture =

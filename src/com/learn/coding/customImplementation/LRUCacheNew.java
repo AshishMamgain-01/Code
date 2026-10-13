@@ -27,12 +27,14 @@ class LRUCacheNew<K,V> extends LinkedHashMap<K, V> {
 		cache.put(1, "Ashish");
 		cache.put(2, "Mamgain");
 		cache.put(3, "Rohit");
-		
-		System.out.println(cache);
+		cache.get(1);
+		cache.put(4, "Atul");
 		
 		System.out.println(cache.get(1));	
-		cache.put(4, "Atul");
-		System.out.println(cache);		
+		System.out.println(cache.get(2));	
+		System.out.println(cache.get(3));	
+		System.out.println(cache.get(4));	
+		
 
 	}
 

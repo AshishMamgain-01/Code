@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 public class TopKFrequentElements {
 
@@ -26,6 +27,7 @@ public class TopKFrequentElements {
 
 		// Step 3: Maintain only K elements
 		for (Integer integer : frequencyHashMap.keySet()) {
+			
 			queue.offer(integer);
 
 			if (queue.size() > k) {
@@ -96,7 +98,7 @@ public class TopKFrequentElements {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int[] nums = { 1, 1, 1, 2, 2, 3 };
+		int[] nums = { 0,1, 1, 1, 2, 2, 3 };
 		int k = 2;
 
 		int[] result = topKFrequent(nums, k);
