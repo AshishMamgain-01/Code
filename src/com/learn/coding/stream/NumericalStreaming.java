@@ -3,6 +3,7 @@ package com.learn.coding.stream;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class NumericalStreaming {
@@ -75,6 +76,7 @@ public class NumericalStreaming {
 		List<Integer> list = Arrays.asList(10, 5, 20, 8, 3, 15, 25, 2, 18);
 		long listSum = list.stream().collect(Collectors.summarizingInt(Integer::intValue)).getSum();
 		System.out.println("listSum: " + listSum);
+
 
 	}
 

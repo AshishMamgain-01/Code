@@ -32,12 +32,11 @@ public class Employee {
     }
 
 	@Override
-    public boolean equals(Object o) {
-		Object a = new Object();
-        if (this == o) return true;  // same reference
-        if (!(o instanceof Employee)) return false; // type check
+    public boolean equals(Object obj) {
+        if (this == obj) return true;  // same reference
+        if (!(obj instanceof Employee)) return false; // type check
 
-        Employee other = (Employee) o;
+        Employee other = (Employee) obj;
         return this.id == other.id &&  // compare primitive
                Objects.equals(this.department, other.department) &&
                Objects.equals(this.name, other.name);

@@ -1,6 +1,7 @@
 package com.learn.coding.stream;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class InterviewEmployeeStream {
@@ -75,6 +76,8 @@ public class InterviewEmployeeStream {
                 .filter(e -> e.getSalary() > 5000)
                 .map(Employee::getName)
                 .collect(Collectors.toList());
+        
+        names = employees.stream().filter(e -> e.getSalary()>5000).collect(Collectors.mapping(Employee::getName, Collectors.toList()));
 
         System.out.println(names);
 
